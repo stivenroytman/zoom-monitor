@@ -2,12 +2,26 @@
 
 ## Purpose
 
-I need a way to keep track of zoom conference attendance for the student org which I manage. The best solution 
-that I came up with thus far uses an external API to send attendance notifications to my phone. I need a way to create
-a more persistent record however, since the logging provided by zoom isn't reliable. The idea then is to:
+I made this to keep track of office hour attendance for one of the student orgs
+that I manage. It bundles together a Python-Selenium based Zoom agent, a set of
+JavaScript functions for pulling data out of the Selenium instance more
+conveniently, and a GoLang server for catching POST requests from the Python
+Zoom agent. All of that is glued together by a few shell scripts.
 
-1. Create a Go server that listens for POST requests on localhost.
-2. On the same server, an instance of Zoom will be running, with JavaScript being executed in the browser console.
-3. That JavaScript code will make POST requests to the Go server with attendance information scraped from the browser.
-4. The server will append received POST requests to a CSV file.
+## System Dependencies
 
+1. python3
+2. python3-venv
+3. golang
+4. firefox-geckodriver (until I figure out a way to make the code more agnostic)
+
+Note: This program is only expected to work properly on a Linux system. 
+
+## Usage
+
+```sh
+git clone https://github.com/stivenroytman/zoom-monitor
+cd zoom-monitor
+./SETUP.sh # can be reexecuted if inaccurate information is given to prompts
+./RUN.sh
+```
