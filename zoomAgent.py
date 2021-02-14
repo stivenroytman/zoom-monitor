@@ -6,7 +6,10 @@ from os import getenv
 from time import sleep
 from requests import post
 
-url = getenv("CONFERENCE_URL")
+with open("CONFIG.sh", "r") as configFile:
+    url = configFile.readlines()[1].split("L=")[1]
+
+print(f"PYTHON| Conference URL: {url}")
 
 driver = Firefox()
 
