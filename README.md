@@ -26,5 +26,20 @@ cd zoom-monitor
 ./RUN.sh
 ```
 
+This sequence of commands will spawn a browser window at the specified Zoom
+meeting URL. Take whichever steps are necessary to join the meeting. Finally, go
+back to the terminal where you initially executed this program, and press ENTER. 
+It will print the JSON requests which were sent from the Zoom agent, and record
+them line by line to data.txt file. 
+
 Execute Ctrl+\ combination to kill the process in a way that makes sure that the
 server stops listening.
+
+## TODO
+
+1. Improve portability by adding code that determines what webdrivers are
+   available on the deployment system, rather than rigidly assuming Firefox.
+2. Figure out a more graceful termination mechanism. The one currently
+   suggested doesn't look pretty at all, and was a last moment consideration.
+3. Add Python script for data parsing to some widely used format like CSV.
+
