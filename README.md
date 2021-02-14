@@ -25,3 +25,6 @@ cd zoom-monitor
 ./SETUP.sh # can be reexecuted if inaccurate information is given to prompts
 ./RUN.sh
 ```
+
+Execute Ctrl+\ combination to kill the process in a way that makes sure that the
+server stops listening.

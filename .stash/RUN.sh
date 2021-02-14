@@ -1,4 +1,6 @@
 #!/bin/sh
 
 source ./CONFIG.sh
-./server >> data.txt & env/bin/python zoomAgent.py
+./server >> data.txt & SERVER_PID=$! 
+
+env/bin/python zoomAgent.py || kill $SERVER_PID
