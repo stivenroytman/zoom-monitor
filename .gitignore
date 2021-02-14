@@ -1,0 +1,5 @@
+.envname
+__pycache__/
+env/
+geckodriver.log
+server
