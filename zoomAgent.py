@@ -12,20 +12,19 @@ driver = Firefox()
 
 driver.get(url)
 
-with open("getUpdate.js", "r") as JS_scriptFile:
+with open("recordAttendance.js", "r") as JS_scriptFile:
     getUpdate = JS_scriptFile.read()
 
 url = "http://localhost:8000/attend"
 headers = {'content-type': 'application/json'}
 
+input("Press ENTER once CAPTCHA challenge is cleared.")
+
 while True:
-    response = input("Continue? (y/n): ")
-    if response == 'y':
-        JSONout = loads(driver.execute_script(getUpdate))
-        print(JSONout)
-        post(url = url, data = dumps(JSONout), headers = headers)
-    else:
-        break
+    JSONout = loads(driver.execute_script(getUpdate))
+    print(JSONout)
+    post(url = url, data = dumps(JSONout), headers = headers)
+    sleep(300)
 
 
 

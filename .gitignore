@@ -3,3 +3,4 @@ __pycache__/
 env/
 geckodriver.log
 server
+data.txt

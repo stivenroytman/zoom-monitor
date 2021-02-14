@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
+	"fmt"
 )
 
 // Check struct
@@ -24,10 +25,9 @@ func recordAttendance(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var check AttendCheck
 	_ = json.NewDecoder(r.Body).Decode(&check)
-	log.Printf("Check: %s", check)
 	checks = append(checks, check)
-	log.Printf("Check list: %s", checks)
 	json.NewEncoder(w).Encode(check)
+	fmt.Println(check)
 }
 
 // Main function

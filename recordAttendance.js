@@ -1,8 +1,29 @@
-const oneMinute = 60000;
-const halfHour = oneMinute * 30;
+function getAttendTime(){
+    return Date()
+    .split(" ")
+    .slice(0,5)
+    .join("_")
+    .replaceAll(":", "-")
+}
 
-let clickMore = () => {
-  document.getElementById("moreButton").click();
+function getGuestList(){
+  let guestList = document.getElementsByClassName("participants-ul")[0].getElementsByTagName("li");
+  let parsedGuests = [];
+  for (guest of guestList) {
+    parsedGuests.push(guest
+		.textContent.replace("(Me)","")
+		.replace("(Host)","")
+		.replace("(Host, Me)", "")
+		.replace(" ", "_"));
+  };
+  return parsedGuests.join(",")
+}
+
+class attendCheck {
+  constructor(){
+    this.time = getAttendTime();
+	this.guests = getGuestList();
+  }
 }
 
 let clickGuest = () => {
@@ -10,30 +31,12 @@ let clickGuest = () => {
 }
 
 let getUpdate = () => {
-	let guestList = document.getElementsByClassName("participants-ul")[0].getElementsByTagName("li");
-	let parsedGuests = [];
-	for (guest of guestList) {parsedGuests.push(guest.textContent)};
-	let guestCSV = parsedGuests.join(", ");
-	let timeNow = Date();
-	let updateMessage = timeNow + " : " + guestCSV;
-	return updateMessage;
+	let aCheck = new attendCheck();
+	let JSONcheck = JSON.stringify(aCheck);
+	return JSONcheck;
 }
 
-let makePost = (rawMessage) => {
-  let Http = new XMLHttpRequest();
-	const root = "localhost:8080/attend";
-	let message = encodeURIComponent(rawMessage);
-	let req = `${root}?message=${message}`;
-	Http.open("POST", req);
-	Http.send();
-};
-
-let sendAttendance = () => {
-	clickGuest();
-	let updateOut = getUpdate();
-	makePost(updateOut);
-	setTimeout(clickGuest, 5000);
-}
-
-setInterval(clickMore, oneMinute);
-setInterval(sendUpdate, halfHour);
+clickGuest()
+attUpdate = getUpdate()
+clickGuest()
+return attUpdate
